@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
-from tkinter import messagebox, Label
+from tkinter import messagebox, Label, filedialog
 import numpy as np
 import random
 import threading
@@ -11,7 +11,28 @@ import threading
 Xs = []
 
 
-def on_click(event):
+def data_files():
+
+    filename = filedialog.askopenfilename(initialdir="/",title="Archivo de coordenadas",filetypes = (("Text files","*.txt*"),("all files","*.*")))
+    
+    with open(filename) as f:
+        for linea in f:
+            coords = linea.split(" ")
+            x = float(coords[0])
+            y = float(coords[1])
+    
+    bias = 1
+
+    for i in len(cords):
+        ent = cords[i].split()
+        Xs.append([bias, ent[0], ent[1], outs[i]])
+
+        if outs[i] == 1:
+            plt.plot(ent[0], ent[1], "ob")
+        else:
+            plt.plot(ent[0], ent[1], "or")
+
+'''def on_click(event):
     #Cuando se hace un click dentro del plano, agrega la coordenada a la lista
     if event.inaxes is not None: #Checa que se encuentre dentro del plano
         bias = 1 #Bias de la entrada
@@ -30,7 +51,7 @@ def on_click(event):
             canvas.draw() #Se actualiza la figura
     else:
         #Se hizo click fuera del rango del plano, se muestra el warning correspondiente
-        messagebox.showwarning("Fuera del plano", "Por favor haga click dentro del plano")
+        messagebox.showwarning("Fuera del plano", "Por favor haga click dentro del plano")'''
 
 def ini_datos():
     #Se asigna un valor al azar a nuestros pesos, entre -1 y 1 con 2 decimales
